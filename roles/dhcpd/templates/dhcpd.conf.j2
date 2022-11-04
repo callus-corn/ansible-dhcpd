@@ -1,0 +1,18 @@
+subnet {{ subnet }} netmask {{ netmask }} {
+    option broadcast-address        {{ broadcast_address }};
+    option routers                  {{ routers }};
+    option subnet-mask              {{ netmask }};
+    option domain-name-servers      {{ domain_name_servers }};
+    option interface-mtu            {{ interface_mtu }};
+    range {{ range }};
+
+{% for host in host_list %}
+    host {{ host.name }} {
+{% for iface in host.iface_list %}
+      hardware ethernet {{ iface.mac }};
+      fixed-address {{ iface.ip }};
+{% endfor %}
+    }
+{% endfor %}    
+
+}

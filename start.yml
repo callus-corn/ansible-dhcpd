@@ -1,0 +1,11 @@
+---
+
+- name: setup dhcp
+  hosts: dhcp
+  become: yes
+  tasks:
+
+    - name: setup dhcpd
+      import_role:
+        name: dhcpd
+      tags: dhcpd
